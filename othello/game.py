@@ -13,6 +13,8 @@ class OthelloBoard:
         self.RIGHT_EDGE = 0b1000000010000000100000001000000010000000100000001000000010000000
         self.LEFT_EDGE = 0b0000000100000001000000010000000100000001000000010000000100000001
 
+        self.placed_pieces = 4
+
         self.current_player = 'B'
 
 
@@ -94,9 +96,22 @@ class OthelloBoard:
                 self.white |= flips | (1 << move)
                 self.black &= ~flips
 
+            self.placed_pieces += 1
+
             self.current_player = 'W' if self.current_player == 'B' else 'B'
             return True
 
+    def get_valid_moves(self):
+        return [i for i in range(64) if self.is_valid_move(i) != 0]
+    
+    def is_game_over(self):
+        return self.placed_pieces >= 64
+    
+    def get_winner(self):
+        black_score = self.black.bin_count()
+        white_score = self.white.bin_count()
+
+        return 'Draw' if black_score == white_score else 'B' if black_score > white_score else 'W'
 
     def set_black(self, black):
         self.black = black

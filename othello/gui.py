@@ -39,7 +39,8 @@ class OthelloUI:
         if self.board.make_move(move):
             self.update_board()
         else:
-            messagebox.showerror("Invalid Move", "This move is not valid. Try again.")
+            pass
+            # messagebox.showerror("Invalid Move", "This move is not valid. Try again.")
 
 if __name__ == "__main__":
     root = tk.Tk()
