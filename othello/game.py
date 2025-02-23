@@ -56,7 +56,7 @@ class OthelloBoard:
             flipped = 0 # Tmp flipped pieces storage
             i = move + d
 
-            while (opponent >> i) & 1:
+            while (i >= 0 and i <= 63 and (opponent >> i) & 1):
 
                 # Check if move is out of bounds
                 if (i < 0 or i > 63):
@@ -76,7 +76,7 @@ class OthelloBoard:
                 flipped |= (1 << i) # set bit at position i
                 i = i + d
 
-            if (player >> i & 1 and flipped):
+            if (flipped != 0 and i >= 0 and i <= 63 and player >> i & 1):
                 flipped_positions |= flipped
 
         return flipped_positions
